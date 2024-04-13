@@ -1,2 +1,3 @@
 # Google-Maps-Timeline
-Data models as well as visualizations for your Google Maps Timeline data.
+
+Data models and visualizations for your Google Maps Timeline data.
