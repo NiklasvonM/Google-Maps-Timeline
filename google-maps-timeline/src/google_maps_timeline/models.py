@@ -15,27 +15,40 @@ ActivityType = Literal[
     "CYCLING",
     "FLYING",
     "HIKING",
+    "HORSEBACK_RIDING",
     "IN_BUS",
     "IN_CABLECAR",
     "IN_FERRY",
+    "IN_FUNICULAR",
+    "IN_GONDOLA_LIFT",
     "IN_PASSENGER_VEHICLE",
     "IN_SUBWAY",
+    "IN_TAXI",
     "IN_TRAIN",
     "IN_TRAM",
     "IN_VEHICLE",
+    "IN_WHEELCHAIR",
     "KAYAKING",
+    "KITESURFING",
     "MOTORCYCLING",
+    "PARAGLIDING",
+    "ROWING",
     "RUNNING",
     "SAILING",
     "SKATEBOARDING",
     "SKATING",
     "SKIING",
+    "SLEDDING",
     "SNOWBOARDING",
+    "SNOWMOBILE",
+    "SNOWSHOEING",
     "STILL",
     "SWIMMING",
     "UNKNOWN_ACTIVITY_TYPE",
     "WALKING",
+    "WALKING_NORDIC",
 ]
+Confidence = Literal["HIGH_CONFIDENCE", "LOW_CONFIDENCE", "MEDIUM_CONFIDENCE", "USER_CONFIRMED"]
 EditConfirmationStatus = Literal["CONFIRMED", "NOT_CONFIRMED"]
 PlaceVisitType = Literal["SINGLE_PLACE"]
 SourceType = Literal["BACKFILLED", "INFERRED", "RESNAPPED_FOR_EDIT"]
@@ -104,19 +117,18 @@ class RoadSegmentConfig(BaseModel):
 
 class PlaceVisitConfig(BaseModel):
     location: LocationConfig
-    duration: DurationConfig
-    placeConfidence: (
-        Literal["LOW_CONFIDENCE", "MEDIUM_CONFIDENCE", "HIGH_CONFIDENCE", "USER_CONFIRMED"] | None
-    ) = None
+    duration: DurationConfig | None = None
+    placeConfidence: Confidence | None = None
     centerLatE7: int | None = None
     centerLngE7: int | None = None
-    visitConfidence: int
+    visitConfidence: int | None = None
     otherCandidateLocations: list[OtherCandidateLocationsConfig] | None = None
     editConfirmationStatus: EditConfirmationStatus
     locationConfidence: int | None = None
-    placeVisitType: PlaceVisitType
-    placeVisitImportance: Literal["MAIN", "TRANSITIONAL"]
-    childVisits: list[ChildVisitsConfig] | None = None
+    placeVisitType: PlaceVisitType | None = None
+    placeVisitImportance: Literal["MAIN", "TRANSITIONAL"] | None = None
+    childVisits: list[PlaceVisitConfig] | None = None
+    placeVisitLevel: int = 0
 
 
 class LocationConfig(BaseModel):
@@ -181,17 +193,3 @@ class PointsConfig(BaseModel):
     lngE7: int
     accuracyMeters: int
     timestamp: datetime
-
-
-class ChildVisitsConfig(BaseModel):
-    location: LocationConfig
-    duration: DurationConfig | None = None
-    placeConfidence: Literal["HIGH_CONFIDENCE", "LOW_CONFIDENCE", "MEDIUM_CONFIDENCE"] | None = None
-    centerLatE7: int | None = None
-    centerLngE7: int | None = None
-    visitConfidence: int | None = None
-    otherCandidateLocations: list[OtherCandidateLocationsConfig] | None = None
-    editConfirmationStatus: EditConfirmationStatus
-    locationConfidence: int | None = None
-    placeVisitType: PlaceVisitType | None = None
-    placeVisitLevel: Literal[1, 2] | None = None
