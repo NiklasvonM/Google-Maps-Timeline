@@ -1,5 +1,6 @@
 """
-This file was generated with the help of https://github.com/NiklasvonM/config-adapter.
+This file was generated with the help of https://github.com/NiklasvonM/config-adapter
+and https://locationhistoryformat.com/reference/semantic/.
 """
 
 from __future__ import annotations
