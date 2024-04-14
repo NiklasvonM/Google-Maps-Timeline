@@ -194,4 +194,4 @@ class ChildVisitsConfig(BaseModel):
     editConfirmationStatus: EditConfirmationStatus
     locationConfidence: int | None = None
     placeVisitType: PlaceVisitType | None = None
-    placeVisitLevel: int | None = None
+    placeVisitLevel: Literal[1, 2] | None = None
