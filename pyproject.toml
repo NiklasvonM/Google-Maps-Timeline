@@ -15,6 +15,7 @@ folium = "^0.16.0"
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.3.7"
 mypy = "^1.9.0"
+matplotlib = "^3.8.4"
 
 [build-system]
 requires = ["poetry-core"]
